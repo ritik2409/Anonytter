@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "167183666359",
+    "firebase_url": "https://anonytter-bffe8.firebaseio.com",
+    "project_id": "anonytter-bffe8",
+    "storage_bucket": "anonytter-bffe8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167183666359:android:5e1e301f36b1e344",
+        "android_client_info": {
+          "package_name": "com.example.android.anonytter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167183666359-2bfvf72aogn96hk8svuf9mp03gfb942j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.anonytter",
+            "certificate_hash": "7bc2d6db3f82501e7fa5d94c84cf07a20e97ccf1"
+          }
+        },
+        {
+          "client_id": "167183666359-vf5b2sdt82fnqk36rolrf8trhhkvftsu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmT17cRoTFymXFnCiAJWwgphEKqncwryU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167183666359-vf5b2sdt82fnqk36rolrf8trhhkvftsu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
