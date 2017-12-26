@@ -22,6 +22,7 @@ repositories {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.google.firebase:firebase-auth:11.0.4'
@@ -32,6 +33,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.facebook.android:facebook-android-sdk:4.29.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
 
 
 }

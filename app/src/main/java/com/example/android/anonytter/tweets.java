@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,24 +31,31 @@ public class tweets extends AppCompatActivity {
     private EditText et;
     private String message;
     private String id;
+    private RecyclerView mpostsList;
+    private MyAdapter itemsAdapter;
+    private  ArrayList<String> tweet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweets);
 
+        mpostsList = (RecyclerView) findViewById(R.id.rv_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mpostsList.setLayoutManager(layoutManager);
 
+        itemsAdapter = new MyAdapter(tweet,this);
+        mpostsList.setAdapter(itemsAdapter);
 
         authb = FirebaseAuth.getInstance();
         Button btn = (Button) findViewById(R.id.new_post);
-       final ArrayList<String> tweet = new ArrayList<String>();
+        tweet = new ArrayList<String>();
         tweet.add("This");
         tweet.add("is a");
         tweet.add("sample");
         tweet.add("tweet");
-        final ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(tweets.this, android.R.layout.simple_list_item_1,tweet);
-        final ListView listView = (ListView) findViewById(R.id.list);
-        listView.setAdapter(itemsAdapter);
+        mpostsList.setAdapter(itemsAdapter);
 
 
 
@@ -71,8 +80,7 @@ public class tweets extends AppCompatActivity {
 
                             myRef.child(id).setValue(message);
                             tweet.add(message);
-                            listView.setAdapter(itemsAdapter);
-
+                            mpostsList.setAdapter(itemsAdapter);
                         }
 
 
