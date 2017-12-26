@@ -42,11 +42,9 @@ public class tweets extends AppCompatActivity {
         setContentView(R.layout.activity_tweets);
 
         mpostsList = (RecyclerView) findViewById(R.id.rv_list);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mpostsList.setLayoutManager(layoutManager);
+        mpostsList.setLayoutManager(new LinearLayoutManager(this));
 
-        itemsAdapter = new MyAdapter(tweet,this);
-        mpostsList.setAdapter(itemsAdapter);
+        itemsAdapter = new MyAdapter(tweet,tweets.this);
 
         authb = FirebaseAuth.getInstance();
         Button btn = (Button) findViewById(R.id.new_post);

@@ -70,7 +70,7 @@ public class signup extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    FirebaseUser user = authb.getCurrentUser();
+                    authb.getCurrentUser();
                     Intent intent = new Intent(signup.this, tweets.class);
                     startActivity(intent);
                 } else {

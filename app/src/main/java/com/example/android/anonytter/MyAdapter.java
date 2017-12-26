@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
 
-    private static ArrayList<String> tweetList;
+    static ArrayList<String> tweetList;
 
     public MyAdapter(ArrayList<String> tweetList, Context context) {
         this.tweetList = tweetList;
@@ -27,7 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
                                                    int viewType) {
         // create a new view
         View itemLayoutView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.tweets_list,parent,false);
+                .inflate(R.layout.tweet_list,parent,false);
 
         // create ViewHolder
 
@@ -36,8 +36,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
     }
 
     // Replace the contents of a view (invoked by the layout manager)
-    @Override
-    public void onBindViewHolder(ListViewHolder holder, int position) {
+
+    public void onBindViewHolder(MyAdapter.ListViewHolder holder, int position) {
 
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
@@ -50,12 +50,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
     // inner class to hold a reference to each item of RecyclerView
     public static class ListViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView ListTweetNumberView;
+        protected TextView ListTweetNumberView;
 
 
         public ListViewHolder(View itemView) {
             super(itemView);
-            ListTweetNumberView = (TextView) itemView.findViewById(R.id.list_item_number);
+            ListTweetNumberView = (TextView) itemView.findViewById(R.id.list);
 
         }
 
