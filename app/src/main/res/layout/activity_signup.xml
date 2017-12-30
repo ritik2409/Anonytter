@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.anonytter.signup"
+    android:background="@drawable/anttra"
     android:orientation="vertical"
-    android:background="@drawable/anttra">
+    tools:context="com.example.android.anonytter.signup">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,69 +17,82 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@android:color/black"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="ANONYTTER"
-            android:textColor="@android:color/white"
-            android:textAlignment="center"
             android:gravity="center_vertical"
-            android:textSize="22sp"/>
+            android:text="ANONYTTER"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
     </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SIGNIN"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:textAlignment="center"/>
-    <EditText
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:hint="Email"
-        android:textColorHint="@android:color/black"
-        android:id="@+id/email"
-        android:inputType="textEmailAddress"
-        android:textColor="@android:color/black"
-        />
-    <EditText
+        android:textColorHint="@color/colorHint">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/black" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:hint="Password"
-        android:textColorHint="@android:color/black"
-        android:id="@+id/password"
-        android:inputType="textPassword"
-        android:textColor="@android:color/black"
-        />
+        android:hint=" "
+        android:textColorHint="@color/colorHint"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorPrimaryDark">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColorHint="@color/colorHint"
+            android:textColor="@android:color/black"/>
+    </android.support.design.widget.TextInputLayout>
+
     <TextView
+        android:id="@+id/submit_signin"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="SUBMIT"
         android:background="@android:color/black"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
-        android:textAlignment="center"
         android:onClick="submit_signin"
-        android:id="@+id/submit_signin"/>
+        android:text="SUBMIT"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
     <TextView
+        android:id="@+id/submit_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New? SIGNUP"
-        android:textSize="25sp"
         android:layout_marginTop="12dp"
-        android:id="@+id/submit_signup"
-        android:onClick="submit_signin"
         android:background="@android:color/black"
-        android:textColor="@android:color/white"
+        android:onClick="submit_signin"
+        android:text="New? SIGNUP"
         android:textAlignment="center"
-        />
-
+        android:textColor="@android:color/white"
+        android:textSize="25sp" />
 
 
 </LinearLayout>

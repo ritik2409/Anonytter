@@ -18,6 +18,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Map;
+
 public class signup extends AppCompatActivity {
     private FirebaseAuth authb;
     private EditText email;
@@ -25,6 +27,7 @@ public class signup extends AppCompatActivity {
     private TextView click_signin;
     private TextView click_signup;
     private ProgressDialog progressDialog;
+    private String email2;
 
 
     @Override
@@ -39,6 +42,7 @@ public class signup extends AppCompatActivity {
         authb = FirebaseAuth.getInstance();
         }
 
+
     public void submit_signin(View view) {
         if (view == click_signin) {
             signinUsr();
@@ -48,9 +52,13 @@ public class signup extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    public String getEmail2()
+    {
+        return email2;
+    }
 
     public void signinUsr() {
-        String email2 = email.getText().toString();
+        email2 = email.getText().toString();
         String password2 = password.getText().toString();
         if (TextUtils.isEmpty(email2)) {
             //email is empty}

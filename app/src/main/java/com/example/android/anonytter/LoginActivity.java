@@ -16,16 +16,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class LoginActivity extends AppCompatActivity {
     private EditText textmail;
     private EditText textpass;
+    private EditText textusername;
     private TextView signin;
     private ProgressDialog progressDialog;
     private TextView submit_signup;
     private FirebaseAuth firebaseAuth;
-
+    private String username;
+    private String email;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         textmail = (EditText) findViewById(R.id.email);
         textpass = (EditText) findViewById(R.id.password);
+        textusername = (EditText) findViewById(R.id.username);
         submit_signup = (TextView) findViewById(R.id.submit_signup);
         signin = (TextView) findViewById(R.id.submit_signin);
-
     }
 
 
@@ -50,8 +55,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public String getEmail(){
+        return getEmail();
+    }
+
+    private void writeNewUser( String name, String email) {
+        User user = new User(name, email);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("users").setValue(user);
+    }
+
     public void registerUser() {
-        String email = textmail.getText().toString().trim();
+        username = textusername.getText().toString();
+        email = textmail.getText().toString().trim();
         String password = textpass.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
@@ -81,6 +97,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+    writeNewUser(username,email);
     }
+
 
 }

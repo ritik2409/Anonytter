@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
 
-    static ArrayList<String> tweetList;
+     ArrayList<String> tweetList;
 
-    public MyAdapter(ArrayList<String> tweetList, Context context) {
+    public MyAdapter(ArrayList<String> tweetList) {
         this.tweetList = tweetList;
     }
 
@@ -42,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
 
-        holder.bind(position);
+        holder.ListTweetNumberView.setText(tweetList.get(position).toString());
 
 
     }
@@ -58,13 +58,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
             ListTweetNumberView = (TextView) itemView.findViewById(R.id.list);
 
         }
-
-        void bind(int listIndex)
-        {
-            ListTweetNumberView.setText(tweetList.get(listIndex).toString());
-        }
-
-
     }
 
 

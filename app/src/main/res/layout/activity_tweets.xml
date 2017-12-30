@@ -12,17 +12,23 @@
         <Button
             android:id="@+id/new_post"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Add New Post"
             android:layout_weight="1"/>
 
         <Button
             android:id="@+id/signOut"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:onClick="logout"
             android:text="Logout"
             android:layout_weight="1"/>
+        <ImageButton
+            android:id="@+id/account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="account"
+            android:src="@drawable/account" />
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
