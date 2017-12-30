@@ -84,8 +84,6 @@ public class tweets extends AppCompatActivity {
                             tweet.add(message);
                             recyclerView.setAdapter(adapter);
                         }
-
-
                     }
                 });
                 ab.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
