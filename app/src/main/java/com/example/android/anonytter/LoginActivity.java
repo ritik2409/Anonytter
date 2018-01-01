@@ -24,26 +24,26 @@ public class LoginActivity extends AppCompatActivity {
     private EditText textmail;
     private EditText textpass;
     private EditText textusername;
-    private TextView signin;
     private ProgressDialog progressDialog;
     private TextView submit_signup;
     private FirebaseAuth firebaseAuth;
     private String username;
     private String email;
     private DatabaseReference mDatabase;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        session = new SessionManager(getApplicationContext());
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         textmail = (EditText) findViewById(R.id.email);
         textpass = (EditText) findViewById(R.id.password);
         textusername = (EditText) findViewById(R.id.username);
         submit_signup = (TextView) findViewById(R.id.submit_signup);
-        signin = (TextView) findViewById(R.id.submit_signin);
     }
 
 
@@ -55,9 +55,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public String getEmail(){
-        return getEmail();
-    }
 
     private void writeNewUser( String name, String email) {
         User user = new User(name, email);
@@ -89,8 +86,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //user registered
                             Toast.makeText(LoginActivity.this, "Registeration Complete", Toast.LENGTH_SHORT).show();
+                            session.createLoginSession(email);
                             Intent intent = new Intent(LoginActivity.this, tweets.class);
                             startActivity(intent);
+                            finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "Could not register, please try again", Toast.LENGTH_SHORT).show();
                             progressDialog.cancel();

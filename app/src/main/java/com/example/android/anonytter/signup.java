@@ -28,6 +28,8 @@ public class signup extends AppCompatActivity {
     private TextView click_signup;
     private ProgressDialog progressDialog;
     private String email2;
+    SessionManager session;
+
 
 
     @Override
@@ -39,6 +41,7 @@ public class signup extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         click_signin = (TextView) findViewById(R.id.submit_signin);
         click_signup = (TextView) findViewById(R.id.submit_signup);
+        session = new SessionManager(getApplicationContext());
         authb = FirebaseAuth.getInstance();
         }
 
@@ -52,10 +55,7 @@ public class signup extends AppCompatActivity {
             startActivity(intent);
         }
     }
-    public String getEmail2()
-    {
-        return email2;
-    }
+
 
     public void signinUsr() {
         email2 = email.getText().toString();
@@ -78,9 +78,11 @@ public class signup extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    session.createLoginSession(email2);
                     authb.getCurrentUser();
                     Intent intent = new Intent(signup.this, tweets.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(signup.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                     progressDialog.cancel();
