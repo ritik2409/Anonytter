@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private String username;
     private String email;
-    private DatabaseReference mDatabase;
     SessionManager session;
 
     @Override
@@ -56,11 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void writeNewUser( String name, String email) {
-        User user = new User(name, email);
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users").setValue(user);
-    }
+
 
     public void registerUser() {
         username = textusername.getText().toString();
@@ -84,9 +80,16 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(username).build();
+                            user.updateProfile(profileUpdates);
+
+
+
                             //user registered
                             Toast.makeText(LoginActivity.this, "Registeration Complete", Toast.LENGTH_SHORT).show();
-                            session.createLoginSession(email);
+                            session.createLoginSession(email,username);
                             Intent intent = new Intent(LoginActivity.this, tweets.class);
                             startActivity(intent);
                             finish();
@@ -97,7 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-    writeNewUser(username,email);
     }
 
 

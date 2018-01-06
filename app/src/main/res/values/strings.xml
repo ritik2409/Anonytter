@@ -14,5 +14,5 @@
         completions."
     </string>
     <string name="facebook_app_id">283536745504852</string>
-    <string name="fb_login_protocol_scheme">283536745504852</string>
+    <string name="fb_login_protocol_scheme">fb283536745504852</string>
 </resources>

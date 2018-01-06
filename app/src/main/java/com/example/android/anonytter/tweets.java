@@ -14,7 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ public class tweets extends AppCompatActivity {
     private ArrayList<String> tweet;
     private ProgressDialog progressDialog;
     private String email;
+    private String username;
     SessionManager session;
 
     @Override
@@ -44,6 +48,7 @@ public class tweets extends AppCompatActivity {
 
         HashMap<String, String> user = session.getUserDetails();
         email = user.get(SessionManager.KEY_EMAIL);
+        username = user.get(SessionManager.KEY_USERNAME);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_list);
@@ -51,6 +56,7 @@ public class tweets extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         authb = FirebaseAuth.getInstance();
+
         Button btn = (Button) findViewById(R.id.new_post);
         tweet = new ArrayList<>();
         adapter = new MyAdapter(tweet);
@@ -98,11 +104,20 @@ public class tweets extends AppCompatActivity {
         });
     }
 
+
+
+    private void updateUI() {
+        Toast.makeText(this, "You are logged out!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(tweets.this, signup.class);
+        startActivity(intent);
+        finish();
+    }
+
     public void account(View view) {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(tweets.this);
             alertDialogBuilder.setTitle("My Account");
-            alertDialogBuilder.setMessage(email).setCancelable(false);
+            alertDialogBuilder.setMessage(email+"\n"+username).setCancelable(false);
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
             alertDialog.setCanceledOnTouchOutside(true);
@@ -114,6 +129,8 @@ public class tweets extends AppCompatActivity {
         progressDialog.show();
 
         authb.signOut();
+        LoginManager.getInstance().logOut();
+        updateUI();
         session.logoutUser();
     }
 }

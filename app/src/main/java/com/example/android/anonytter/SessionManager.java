@@ -30,6 +30,9 @@ public class SessionManager {
     // All Shared Preferences Keys
     private static final String IS_LOGIN = "IsLoggedIn";
 
+    //username
+    public static final String KEY_USERNAME = "username";
+
     // Email address (make variable public to access from outside)
     public static final String KEY_EMAIL = "email";
 
@@ -43,9 +46,12 @@ public class SessionManager {
     /**
      * Create login session
      * */
-    public void createLoginSession( String email){
+    public void createLoginSession( String username ,String email){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
+
+        //Storing username in pref
+        editor.putString(KEY_USERNAME, username);
 
         // Storing email in pref
         editor.putString(KEY_EMAIL, email);
@@ -83,6 +89,9 @@ public class SessionManager {
      * */
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
+
+        //user username
+        user.put(KEY_USERNAME,pref.getString(KEY_USERNAME,null));
 
         // user email id
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
