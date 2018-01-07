@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             //user registered
                             Toast.makeText(LoginActivity.this, "Registeration Complete", Toast.LENGTH_SHORT).show();
-                            session.createLoginSession(email,username);
+                            session.createLoginSession(username,email);
                             Intent intent = new Intent(LoginActivity.this, tweets.class);
                             startActivity(intent);
                             finish();

@@ -18,10 +18,17 @@ import android.widget.Toast;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 
 public class tweets extends AppCompatActivity {
 
@@ -31,11 +38,13 @@ public class tweets extends AppCompatActivity {
     private String id;
     private RecyclerView recyclerView;
     private MyAdapter adapter;
-    private ArrayList<String> tweet;
+    private ArrayList<Posts> tweet;
     private ProgressDialog progressDialog;
     private String email;
     private String username;
     SessionManager session;
+    String time;
+    Posts posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +59,19 @@ public class tweets extends AppCompatActivity {
         email = user.get(SessionManager.KEY_EMAIL);
         username = user.get(SessionManager.KEY_USERNAME);
 
-
         recyclerView = (RecyclerView) findViewById(R.id.rv_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         authb = FirebaseAuth.getInstance();
 
+
         Button btn = (Button) findViewById(R.id.new_post);
         tweet = new ArrayList<>();
         adapter = new MyAdapter(tweet);
-        tweet.add("This");
-        tweet.add("is a");
-        tweet.add("sample");
-        tweet.add("tweet");
+        readData();
+
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
 
@@ -81,13 +89,7 @@ public class tweets extends AppCompatActivity {
                         if (message.isEmpty()) {
                             Toast.makeText(tweets.this, "Plz fill something to add post", Toast.LENGTH_LONG).show();
                         } else {
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference myRef = database.getReference("tweeets");
-                            id = myRef.push().getKey();
-
-                            myRef.child(id).setValue(message);
-                            tweet.add(message);
-                            recyclerView.setAdapter(adapter);
+                            writeNewPost(message);
                         }
                     }
                 });
@@ -104,6 +106,38 @@ public class tweets extends AppCompatActivity {
         });
     }
 
+    private void readData() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference rd = databaseReference.child("Posts");
+        rd.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot items: dataSnapshot.getChildren())
+                {
+                    posts = items.getValue(Posts.class);
+                    posts.author = "@"+username;
+                    tweet.add(posts);
+                }
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(tweets.this, "Error reading data!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void writeNewPost(String message) {
+        time = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss aaa").format(Calendar.getInstance().getTime());
+        posts = new Posts(email, message, time);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference postsref = ref.child("Posts").push();
+        postsref.setValue(posts);
+        posts = new Posts("@"+username,message,time);
+        tweet.add(posts);
+        recyclerView.setAdapter(adapter);
+    }
 
 
     private void updateUI() {
@@ -117,7 +151,7 @@ public class tweets extends AppCompatActivity {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(tweets.this);
             alertDialogBuilder.setTitle("My Account");
-            alertDialogBuilder.setMessage(email+"\n"+username).setCancelable(false);
+            alertDialogBuilder.setMessage("username:"+username+"\n"+email).setCancelable(false);
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
             alertDialog.setCanceledOnTouchOutside(true);

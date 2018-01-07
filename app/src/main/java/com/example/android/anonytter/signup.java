@@ -159,7 +159,7 @@ public class signup extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     user = authb.getCurrentUser();
                     username = user.getDisplayName();
-                    session.createLoginSession(email2,username);
+                    session.createLoginSession(username,email2);
                     Intent intent = new Intent(signup.this, tweets.class);
                     startActivity(intent);
                     finish();

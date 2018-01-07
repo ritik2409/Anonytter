@@ -2,6 +2,9 @@
   <dictionary name="ritik">
     <words>
       <w>anonytter</w>
+      <w>authb</w>
+      <w>postsref</w>
+      <w>usersref</w>
     </words>
   </dictionary>
 </component>

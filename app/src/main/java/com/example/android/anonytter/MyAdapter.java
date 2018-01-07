@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -15,9 +17,10 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
 
-     ArrayList<String> tweetList;
+    private  ArrayList<Posts> tweetList = new ArrayList<Posts>();
 
-    public MyAdapter(ArrayList<String> tweetList) {
+
+    public MyAdapter(ArrayList<Posts> tweetList) {
         this.tweetList = tweetList;
     }
 
@@ -42,7 +45,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
 
-        holder.ListTweetNumberView.setText(tweetList.get(position).toString());
+        Posts post = tweetList.get(position);
+
+        holder.ListTweet.setText(post.getMessage());
+        holder.name.setText(post.getAuthor());
+        holder.time.setText(post.getTime());
 
 
     }
@@ -50,12 +57,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ListViewHolder> {
     // inner class to hold a reference to each item of RecyclerView
     public static class ListViewHolder extends RecyclerView.ViewHolder {
 
-        protected TextView ListTweetNumberView;
+        protected TextView ListTweet;
+        protected TextView name;
+        protected TextView time;
 
 
         public ListViewHolder(View itemView) {
             super(itemView);
-            ListTweetNumberView = (TextView) itemView.findViewById(R.id.list);
+            ListTweet = (TextView) itemView.findViewById(R.id.list);
+            name = (TextView) itemView.findViewById(R.id.username);
+            time = (TextView) itemView.findViewById(R.id.time);
 
         }
     }
