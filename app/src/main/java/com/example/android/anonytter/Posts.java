@@ -14,15 +14,17 @@ public class Posts {
     public String author;
     public String message;
     public String time;
+    public String imageuri;
 
     public Posts() {
         // Default constructor required for calls to DataSnapshot.getValue(Posts.class)
     }
 
-    public Posts(String author, String message,String time) {
+    public Posts(String author, String message,String time,String imageuri) {
         this.author = author;
         this.message = message;
         this.time = time;
+        this.imageuri = imageuri;
     }
 
 
@@ -36,6 +38,10 @@ public class Posts {
 
     public String getTime() {
         return time;
+    }
+
+    public String getImageuri() {
+        return imageuri;
     }
 }
 

@@ -93,33 +93,6 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="25sp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="OR"
-        android:textSize="44sp"
-        android:textColor="@android:color/black"
-        android:textAlignment="center"/>
-
-
-        <com.google.android.gms.common.SignInButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:layout_gravity="center_horizontal"/>
-
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/fblogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:textSize="22sp"/>
-
-
-
 
 
 </LinearLayout>

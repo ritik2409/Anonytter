@@ -43,8 +43,6 @@ public class signup extends AppCompatActivity {
     private String email2;
     private String username;
     SessionManager session;
-    LoginButton fbLoginBtn;
-    CallbackManager callbackManager;
 
 
     @Override
@@ -57,72 +55,12 @@ public class signup extends AppCompatActivity {
         click_signin = (TextView) findViewById(R.id.submit_signin);
         click_signup = (TextView) findViewById(R.id.submit_signup);
 
-        fbLoginBtn = (LoginButton) findViewById(R.id.fblogin);
-        fbLoginBtn.setReadPermissions("email","public_profile");
-        callbackManager = CallbackManager.Factory.create();
-
-
-        fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                String toastmessage = error.getMessage();
-                Toast.makeText(signup.this, toastmessage, Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
 
         session = new SessionManager(getApplicationContext());
         authb = FirebaseAuth.getInstance();
 
 
     }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-
-    private void updateUI() {
-        Intent intent = new Intent(signup.this, tweets.class);
-        startActivity(intent);
-        finish();
-    }
-
-
-    private void handleFacebookAccessToken(AccessToken token) {
-
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        authb.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-
-                            updateUI();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(signup.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                });
-    }
-
 
 
     public void submit_signin(View view) {

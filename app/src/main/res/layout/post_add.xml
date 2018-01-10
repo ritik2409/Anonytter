@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:onClick="choose_image"
+        android:text="CHOOSE IMAGE"
+        android:textAlignment="center"
+        android:textSize="22sp" />
+
+    <ImageView
+        android:id="@+id/add_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:src="@drawable/android" />
+
+    <EditText
+        android:id="@+id/tweet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="TYPE YOUR TWEET HERE!"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_dark"
+            android:onClick="return_back"
+            android:text="CANCEL" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/holo_blue_dark"
+            android:onClick="submit_post"
+            android:text="SUBMIT" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
