@@ -41,7 +41,7 @@ public class addPost extends AppCompatActivity {
     DatabaseReference databaseReference;
     Uri imageUri;
     SessionManager sessionManager;
-    String email;
+    String username;
     String time;
     Posts posts;
 
@@ -55,7 +55,7 @@ public class addPost extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         sessionManager = new SessionManager(getApplicationContext());
         HashMap<String, String> user = sessionManager.getUserDetails();
-        email = user.get(SessionManager.KEY_EMAIL);
+        username = user.get(SessionManager.KEY_USERNAME);
 
     }
 
@@ -103,7 +103,7 @@ public class addPost extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     progressDialog.dismiss();
                     time = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss aaa").format(Calendar.getInstance().getTime());
-                    posts = new Posts(email, tweet.getText().toString(), time, taskSnapshot.getDownloadUrl().toString());
+                    posts = new Posts(username, tweet.getText().toString(), time, taskSnapshot.getDownloadUrl().toString());
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                     DatabaseReference postsref = ref.child("Posts").push();
                     postsref.setValue(posts);

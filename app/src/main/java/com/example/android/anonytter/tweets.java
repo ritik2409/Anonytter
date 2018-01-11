@@ -89,7 +89,7 @@ public class tweets extends AppCompatActivity {
 
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
                     posts = snap.getValue(Posts.class);
-                    posts.author = "@"+ username;
+                    posts.author = "@"+ posts.author;
                     tweet.add(posts);
                 }
                 adapter = new MyAdapter(tweet, tweets.this, R.layout.tweet_list);
